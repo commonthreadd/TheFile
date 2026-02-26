@@ -66,7 +66,7 @@ function itemFromCard(card, fallbackIdx = 0) {
 
 /* ====================== SHOP / NEW ARRIVALS: CLICK MEDIA -> CART + REDIRECT ====================== */
 /*
-  Clicking the product image adds to cart then goes to CartNick.html
+  Clicking the product image adds to cart then goes to cart.html
 */
 document.querySelectorAll(".product-card .product-media").forEach((a, idx) => {
   a.addEventListener("click", (e) => {
@@ -78,7 +78,7 @@ document.querySelectorAll(".product-card .product-media").forEach((a, idx) => {
     const item = itemFromCard(card, idx);
     addToCart(item);
 
-    window.location.href = "CartNick.html";
+    window.location.href = "cart.html";
   });
 });
 
@@ -96,7 +96,7 @@ document.querySelectorAll(".product-card .add-to-cart").forEach((btn, idx) => {
     addToCart(item);
 
     // If you want button click to go to cart as well, uncomment:
-    // window.location.href = "CartNick.html";
+    // window.location.href = "cart.html";
   });
 });
 
