@@ -1,0 +1,359 @@
+/* ===== Design Tokens ===== */
+:root{
+  --gold:#bfa36a;         /* Minneapolis Club accent (muted antique gold) */
+  --pearl:#f7f4ec;        /* warm pearl */
+  --ink:#111111;
+  --ash:#777777;
+  --veil:#eeeeee;
+}
+
+/* ===== Global ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#fff;color:var(--ink);line-height:1.6;
+
+  /* Cartier-clean rendering */
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  font-feature-settings:"liga" 1,"kern" 1;
+}
+.container{width:90%;max-width:1300px;margin:0 auto}
+img{max-width:100%;display:block}
+
+/* ===== Typography ===== */
+h1,h2,h3{
+  font-family:"Cormorant Garamond",serif;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+.smallcaps{
+  font-variant:all-small-caps;
+  letter-spacing:.12em;
+}
+
+/* ===== Header ===== */
+.topbar{
+  padding:18px 0;
+  border-bottom:1px solid var(--veil);
+  background:#fff;
+}
+.topbar .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px
+}
+.brand{
+  text-decoration:none;
+  color:var(--ink);
+  display:flex;
+  flex-direction:column;
+  line-height:1.1
+}
+.brand .brand-main{
+  font-family:"Italiana",serif;
+  font-size:28px;
+  letter-spacing:1px
+}
+.brand .brand-sub{
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#6b6b6b;
+}
+
+/* Nav */
+.nav-list{
+  list-style:none;
+  display:flex;
+  gap:28px
+}
+.nav-link{
+  text-decoration:none;
+  color:var(--ink);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  position:relative;
+  padding-bottom:6px;
+}
+.nav-link[aria-current="page"],
+.nav-link:hover{
+  color:var(--gold)
+}
+.nav-link::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:1px;
+  width:0%;
+  height:1px;
+  background:var(--gold);
+  transition:width .25s ease;
+}
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after{
+  width:100%;
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:14px
+}
+.icon-btn{
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  position:relative;
+  padding:3px
+}
+.icon-btn svg{
+  stroke:var(--ink);
+  width:20px;
+  height:20px;
+  transition:.3s
+}
+.icon-btn:hover svg{
+  stroke:var(--gold)
+}
+.cart-badge{
+  background:var(--ink);
+  color:#fff;
+  font-size:11px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  position:absolute;
+  top:-5px;
+  right:-6px;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+/* ===== Section ===== */
+.section{padding:56px 0}
+.section-head{text-align:center}
+.section-title{
+  font-size:30px;
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:2px
+}
+.section-sub{
+  font-size:15px;
+  color:#777;
+  font-style:italic
+}
+
+/* ===== Product Grid ===== */
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  margin-top:36px
+}
+
+/* Updated for actions layout */
+.product-card{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  cursor:default
+}
+.product-media{
+  display:block;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer
+}
+.product-media img{
+  width:100%;
+  transition:opacity .35s ease
+}
+.product-media .img-back{
+  position:absolute;
+  inset:0;
+  opacity:0
+}
+.product-card:hover .img-back{opacity:1}
+.product-card:hover .img-front{opacity:0}
+
+.product-info{
+  margin-top:10px;
+}
+.product-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:20px;
+  margin-top:0
+}
+.product-price{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#6b6b6b;
+  margin-top:6px
+}
+
+/* ===== Product Actions + Buttons (ADDED) ===== */
+.product-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:14px;
+}
+
+.btn{
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  padding:10px 14px;
+  border-radius:4px;
+  cursor:pointer;
+  transition:transform .2s ease, background .25s ease, color .25s ease, border-color .25s ease;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:nowrap;
+  line-height:1;
+}
+
+.btn.outline{
+  background:transparent;
+  border:1px solid var(--ink);
+  color:var(--ink);
+}
+.btn.outline:hover{
+  background:var(--ink);
+  color:#fff;
+}
+
+.btn.gold{
+  background:var(--gold);
+  border:1px solid var(--gold);
+  color:var(--ink);
+}
+.btn.gold:hover{
+  transform:translateY(-1px);
+  background:#a88c56;
+  border-color:#a88c56;
+}
+
+/* Mobile stacking for buttons */
+@media (max-width: 520px){
+  .product-actions{
+    flex-direction:column;
+    align-items:center;
+  }
+  .product-actions .btn{
+    width:100%;
+    max-width:260px;
+  }
+}
+
+/* ===== Footer ===== */
+.footer{
+  background:#fff;
+  padding:58px 0 42px;
+  text-align:center;
+  font-family:"Cormorant Garamond",serif;
+  border-top:1px solid var(--veil);
+}
+.footer-layout{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px
+}
+.mark{
+  font-family:"Italiana",serif;
+  font-size:40px;
+  letter-spacing:2px;
+  font-weight:400;
+  color:var(--ink)
+}
+.footer-motto{
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#6d6d6d;
+  margin-top:-4px
+}
+.gold-rule{
+  width:75px;
+  height:1px;
+  background:var(--gold);
+  border:none;
+  margin:10px auto
+}
+.footer-text{
+  font-size:14px;
+  color:#7a7977;
+  opacity:.9;
+  max-width:520px
+}
+
+.footer-social{
+  display:flex;
+  gap:18px;
+  margin-top:8px
+}
+.social-icon svg{
+  width:22px;
+  height:22px;
+  stroke:var(--ink);
+  transition:.3s
+}
+.social-icon:hover svg{
+  stroke:var(--gold)
+}
+
+.copyright{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#999;
+  margin-top:14px
+}
+.rights{opacity:.85}
+
+/* ===== Responsive ===== */
+@media (max-width: 960px){
+  .hero .wrap{grid-template-columns:1fr;padding:64px 0}
+}
+@media (max-width: 768px){
+  .nav-list{gap:18px}
+  .brand .brand-main{font-size:24px}
+}
+
+/* ===== Cart Icon Bounce ===== */
+@keyframes cartShake {
+  0%{transform:scale(1)}
+  30%{transform:scale(1.3)}
+  60%{transform:scale(.85)}
+  100%{transform:scale(1)}
+}
+.icon-btn.cart-shake svg{
+  animation:cartShake .6s ease
+}
+
+/* ================================================= */
+/* ===== SHOP PAGE OVERRIDE — 2 PRODUCTS PER ROW ==== */
+/* ================================================= */
+
+#shopGrid.product-grid{
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 520px){
+  #shopGrid.product-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+
