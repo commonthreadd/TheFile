@@ -1,7 +1,7 @@
 /* ===== Design Tokens ===== */
 :root{
-  --gold:#bfa36a;         /* Minneapolis Club accent (muted antique gold) */
-  --pearl:#f7f4ec;        /* warm pearl */
+  --gold:#bfa36a;
+  --pearl:#f7f4ec;
   --ink:#111111;
   --ash:#777777;
   --veil:#eeeeee;
@@ -13,8 +13,6 @@ html{scroll-behavior:smooth}
 body{
   font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:#fff;color:var(--ink);line-height:1.6;
-
-  /* Cartier-clean rendering */
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   font-feature-settings:"liga" 1,"kern" 1;
@@ -56,6 +54,12 @@ h1,h2,h3{
   font-family:"Italiana",serif;
   font-size:28px;
   letter-spacing:1px
+}
+.brand-logo{
+  display:block;
+  height:74px;
+  width:auto;
+  object-fit:contain;
 }
 .brand .brand-sub{
   font-size:12px;
@@ -143,6 +147,15 @@ h1,h2,h3{
   text-transform:uppercase;
   letter-spacing:2px
 }
+.section-tab-title{
+  font-family:"Italiana","Cormorant Garamond",serif;
+  font-size:clamp(32px,4.2vw,52px);
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  font-weight:400;
+  color:var(--ink);
+  line-height:1.08;
+}
 .section-sub{
   font-size:15px;
   color:#777;
@@ -198,7 +211,7 @@ h1,h2,h3{
   margin-top:6px
 }
 
-/* ===== Product Actions + Buttons (ADDED) ===== */
+/* ===== Product Actions + Buttons ===== */
 .product-actions{
   display:flex;
   gap:10px;
@@ -322,6 +335,137 @@ h1,h2,h3{
 }
 .rights{opacity:.85}
 
+/* ===== Premium Footer Grid ===== */
+.footer-luxe{
+  width:100%;
+}
+
+.footer-columns{
+  display:grid;
+  grid-template-columns:1.25fr repeat(3,minmax(0,1fr));
+  gap:18px;
+  width:100%;
+  text-align:left;
+}
+
+.footer-news-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(14px,1.2vw,20px);
+  font-weight:500;
+  line-height:1.2;
+  margin:0 0 10px;
+  color:var(--ink);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.footer-email-form{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.footer-email-input{
+  flex:1;
+  min-width:0;
+  border:1px solid #d2d2d2;
+  background:#fff;
+  padding:10px 12px;
+  font-size:14px;
+  color:var(--ink);
+}
+
+.footer-email-input:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+
+.footer-email-btn{
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:#fff;
+  padding:10px 16px;
+  font-size:13px;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.footer-email-btn:hover{
+  border-color:var(--gold);
+  background:var(--gold);
+  color:var(--ink);
+}
+
+.footer-col-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:22px;
+  font-weight:500;
+  letter-spacing:.02em;
+  margin:0 0 8px;
+  color:var(--ink);
+}
+
+.footer-link{
+  display:block;
+  text-decoration:none;
+  color:#626262;
+  font-size:14px;
+  line-height:1.35;
+  margin:4px 0;
+  transition:color .2s ease;
+}
+
+.footer-link:hover{
+  color:var(--gold);
+}
+
+.footer-bottom-row{
+  width:100%;
+  margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid var(--veil);
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+
+.footer-brand-bottom{
+  grid-column:2;
+  justify-self:center;
+  font-family:"Italiana",serif;
+  font-size:28px;
+  letter-spacing:.02em;
+  color:var(--ink);
+}
+
+.footer-locale{
+  grid-column:3;
+  justify-self:end;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#7b7b7b;
+}
+
+@media (max-width: 980px){
+  .footer-columns{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .footer-col-title{font-size:18px}
+  .footer-link{font-size:13px}
+  .footer-bottom-row{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .footer-brand-bottom,
+  .footer-locale{
+    grid-column:1;
+    justify-self:center;
+  }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 960px){
   .hero .wrap{grid-template-columns:1fr;padding:64px 0}
@@ -329,6 +473,7 @@ h1,h2,h3{
 @media (max-width: 768px){
   .nav-list{gap:18px}
   .brand .brand-main{font-size:24px}
+  .brand-logo{height:58px}
 }
 
 /* ===== Cart Icon Bounce ===== */
@@ -342,18 +487,105 @@ h1,h2,h3{
   animation:cartShake .6s ease
 }
 
-/* ================================================= */
-/* ===== SHOP PAGE OVERRIDE — 2 PRODUCTS PER ROW ==== */
-/* ================================================= */
-
-#shopGrid.product-grid{
-  grid-template-columns: repeat(2, 1fr);
+/* ===== Shop Grid: Match New Arrivals Feel ===== */
+.shop-page #shopGrid.product-grid{
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+  align-items: stretch;
 }
 
-@media (max-width: 520px){
-  #shopGrid.product-grid{
-    grid-template-columns: 1fr;
+.shop-page .section .container{
+  width: 96%;
+  max-width: 1850px;
+}
+
+.shop-page #shopGrid .product-card{
+  gap: 10px;
+  height: 100%;
+}
+
+.shop-page #shopGrid .product-media{
+  background: transparent;
+  border: 1px solid rgba(0,0,0,.06);
+  padding: 6px;
+  aspect-ratio: 4 / 6.9;
+}
+
+.shop-page #shopGrid .utility-wrap{
+  position:absolute;
+  top:10px;
+  right:10px;
+  display:flex;
+  gap:8px;
+  z-index:3;
+}
+
+.shop-page #shopGrid .icon-fav,
+.shop-page #shopGrid .icon-util{
+  width:30px;
+  height:30px;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,.04);
+  background:rgba(255,255,255,.7);
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  transition:transform .2s ease,border-color .2s ease,color .2s ease;
+}
+
+.shop-page #shopGrid .icon-util svg{
+  stroke-width:1.6;
+}
+
+.shop-page #shopGrid .icon-fav:hover{
+  transform:translateY(-1px) scale(1.01);
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.shop-page #shopGrid .icon-util:hover{
+  transform:translateY(-1px) scale(1.01);
+  border-color:#999;
+}
+
+.shop-page #shopGrid .icon-fav.is-on{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.shop-page #shopGrid .product-media img{
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.08);
+  transform-origin: center 60%;
+}
+
+.shop-page #shopGrid .product-media .img-back{
+  inset: 6px;
+}
+
+.shop-page #shopGrid .product-card:hover .product-media img{
+  transform: scale(1.1);
+}
+
+.shop-page #shopGrid .product-info{
+  min-height: 72px;
+}
+
+.shop-page #shopGrid .product-actions{
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+@media (max-width: 1240px){
+  .shop-page #shopGrid.product-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-
+@media (max-width: 520px){
+  .shop-page #shopGrid.product-grid{
+    grid-template-columns: 1fr;
+  }
+}

@@ -55,13 +55,68 @@ function itemFromCard(card, fallbackIdx = 0) {
     card.querySelector("img")?.getAttribute("src") ||
     "";
 
+  const img2 =
+    card.querySelector("img.img-back")?.getAttribute("src") ||
+    img;
+
   // Stable id from title (good enough for demo)
   const id = title
     .toLowerCase()
     .replace(/\s+/g, "-")
     .replace(/[^a-z0-9\-]/g, "");
 
-  return { id, title, price, img };
+  return { id, title, price, img, img2 };
+}
+
+function goToProductDetail(item) {
+  const params = new URLSearchParams({
+    id: item.id,
+    name: item.title,
+    price: String(item.price),
+    img: item.img,
+    img2: item.img2
+  });
+  window.location.href = `product.html?${params.toString()}`;
+}
+
+if (document.body.classList.contains("shop-page")) {
+  document.querySelectorAll("#shopGrid .product-media").forEach((media, idx) => {
+    if (!media.querySelector(".utility-wrap")) {
+      media.insertAdjacentHTML(
+        "afterbegin",
+        `<div class="utility-wrap">
+          <button class="icon-util" type="button" aria-label="Quick view">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M4 12h16M12 4v16"></path>
+            </svg>
+          </button>
+          <button class="icon-fav" type="button" aria-label="Add to favorites">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20.8 4.6c-1.5-1.5-4-1.5-5.5 0L12 7.9 8.7 4.6c-1.5-1.5-4-1.5-5.5 0s-1.5 4 0 5.5L12 19l8.8-8.9c1.5-1.5 1.5-4 0-5.5z"></path>
+            </svg>
+          </button>
+        </div>`
+      );
+    }
+
+    const card = media.closest(".product-card");
+    const fav = media.querySelector(".icon-fav");
+    const util = media.querySelector(".icon-util");
+
+    fav?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      fav.classList.toggle("is-on");
+    });
+
+    util?.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!card) return;
+      const item = itemFromCard(card, idx);
+      goToProductDetail(item);
+    });
+  });
 }
 
 /* ====================== SHOP / NEW ARRIVALS: CLICK MEDIA -> CART + REDIRECT ====================== */
@@ -70,12 +125,29 @@ function itemFromCard(card, fallbackIdx = 0) {
 */
 document.querySelectorAll(".product-card .product-media").forEach((a, idx) => {
   a.addEventListener("click", (e) => {
+    const isShopPage = document.body.classList.contains("shop-page");
+    const isArrivalsPage = Boolean(document.querySelector(".arrivals-page"));
+    const isHomeShopPreview = Boolean(a.closest("#homeShopPreview"));
+    if (isArrivalsPage) return;
+
     e.preventDefault();
 
     const card = a.closest(".product-card");
     if (!card) return;
 
     const item = itemFromCard(card, idx);
+
+    if (isShopPage) {
+      if (e.target.closest(".icon-fav")) return;
+      goToProductDetail(item);
+      return;
+    }
+
+    if (isHomeShopPreview) {
+      goToProductDetail(item);
+      return;
+    }
+
     addToCart(item);
 
     window.location.href = "cart.html";
@@ -198,7 +270,7 @@ function renderCartPage() {
   const checkoutBtn = document.getElementById("checkoutBtn");
   if (checkoutBtn) {
     checkoutBtn.onclick = () => {
-      alert("Checkout is for fiirin dee adeer for now. Next step: connect Stripe.");
+      alert("Bari Soo Labo we will connect to stripe.");
     };
   }
 }
@@ -206,4 +278,3 @@ function renderCartPage() {
 /* ====================== RUN ON LOAD ====================== */
 updateCartBadge();
 renderCartPage();
-

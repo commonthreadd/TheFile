@@ -1,0 +1,278 @@
+/* new-arrivals.css */
+
+/* PAGE WRAP (keeps your theme background) */
+.arrivals-page{
+  min-height: calc(100vh - 220px);
+  background: transparent;
+  padding: 5vh 0 7vh;
+}
+
+.arrivals-page .container{
+  width: 96%;
+  max-width: 1800px;
+}
+
+/* header */
+.arrivals-header{
+  text-align:center;
+  margin-bottom: 28px;
+}
+
+.arrivals-title{
+  font-size: clamp(26px, 2.8vw, 40px);
+  letter-spacing: .04em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.arrivals-sub{
+  margin: 0;
+  color: #7f7f7f;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* GRID */
+.arrivals-page .product-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 0;
+  align-items: stretch;
+}
+
+/* CARD */
+.arrivals-page .product-card{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* media like the screenshot: clean white, centered, lots of space */
+.arrivals-page .product-media{
+  position:relative;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 0;
+  overflow:hidden;
+  padding: 8px;
+  aspect-ratio: 4 / 6.4;
+  height: auto;
+  box-shadow: none;
+}
+
+.arrivals-page .product-media-tall{
+  aspect-ratio: 4 / 6.4;
+}
+
+.arrivals-page .product-media img{
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  display:block;
+  border-radius: 0;
+  transition: opacity .35s ease, transform .35s ease;
+  transform: scale(1.08);
+  transform-origin: center 60%;
+}
+
+/* hover swap */
+.arrivals-page .product-media .img-front{ opacity:1; }
+.arrivals-page .product-media .img-back{
+  position:absolute;
+  inset:8px;
+  opacity:0;
+}
+
+.arrivals-page .product-card:hover .product-media .img-front{ opacity:0; }
+.arrivals-page .product-card:hover .product-media .img-back{ opacity:1; }
+.arrivals-page .product-card:hover .product-media img{ transform: scale(1.1); }
+
+/* "New" pill */
+.arrivals-page .pill-new{
+  position:absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 12px;
+  color:#838383;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  z-index: 3;
+}
+
+.arrivals-page .utility-wrap{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.arrivals-page .icon-fav,
+.arrivals-page .icon-util{
+  position: static;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,.04);
+  background: rgba(255,255,255,.7);
+  cursor: pointer;
+  display:grid;
+  place-items:center;
+  transition: transform .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.arrivals-page .icon-util svg{
+  stroke-width: 1.6;
+}
+
+.arrivals-page .icon-fav:hover{
+  transform: translateY(-1px) scale(1.01);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.arrivals-page .icon-util:hover{
+  transform: translateY(-1px) scale(1.01);
+  border-color: #999;
+}
+
+.arrivals-page .icon-fav.is-on{
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* info under image (like screenshot) */
+.arrivals-page .product-info{
+  text-align:center;
+  padding: 2px 4px 0;
+  min-height: 96px;
+}
+
+.arrivals-page .product-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:.3px;
+  margin:0;
+  text-transform:none;
+}
+
+.arrivals-page .product-subtitle{
+  margin: 1px 0 2px;
+  font-size: 13px;
+  color: #7f7f7f;
+}
+
+.arrivals-page .product-price{
+  margin:6px 0 10px;
+  color:#6b6b6b;
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-family:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-style:normal;
+}
+
+/* swatches */
+.arrivals-page .product-swatches{
+  display:flex;
+  gap: 8px;
+  justify-content:center;
+  align-items:center;
+  min-height: 14px;
+}
+
+.arrivals-page .swatch{
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.16);
+  background: var(--swatch);
+}
+
+.arrivals-page .swatch.more{
+  width:auto;
+  height:auto;
+  border: none;
+  background: transparent;
+  color:#7d7d7d;
+  font-size: 22px;
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: .02em;
+}
+
+.arrivals-page .product-actions{
+  display:flex;
+  gap: 8px;
+  justify-content:center;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.arrivals-page .product-actions .btn{
+  font-size: 10px;
+  letter-spacing: .12em;
+  padding: 8px 12px;
+}
+
+.arrivals-page .product-actions .btn.outline{
+  border-color: var(--gold);
+  color: var(--gold);
+  background: transparent;
+}
+
+.arrivals-page .product-actions .btn.outline:hover{
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.arrivals-page .product-actions .btn.gold{
+  display: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1240px){
+  .arrivals-page .product-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 980px){
+  .arrivals-page .product-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .arrivals-page .product-media{
+    aspect-ratio: 4 / 5.8;
+  }
+}
+
+@media (max-width: 620px){
+  .arrivals-page{
+    padding: 4vh 0 7vh;
+  }
+
+  .arrivals-page .product-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .arrivals-page .product-media{
+    aspect-ratio: 4 / 5.6;
+  }
+
+  .arrivals-page .product-title{
+    font-size: 28px;
+  }
+
+  .arrivals-page .product-price{
+    font-size: 24px;
+  }
+}
