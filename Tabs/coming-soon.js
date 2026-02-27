@@ -15,7 +15,6 @@
   var minsEl = document.getElementById("count-mins");
   var secsEl = document.getElementById("count-secs");
   var dropTitle = document.getElementById("drop-title");
-  var dropTargetNote = document.getElementById("drop-target-note");
   var dropCard = document.querySelector(".drop-card");
   var DROP_TARGET_ISO = window.DROP_TARGET_ISO || "2026-07-27T12:00:00Z";
   var DROP_TARGET = new Date(DROP_TARGET_ISO).getTime();
@@ -27,7 +26,6 @@
     revealLogin();
   }
   animateEntrance();
-  renderTargetNote();
   startCountdown();
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -175,16 +173,4 @@
     });
   }
 
-  function renderTargetNote() {
-    if (!dropTargetNote || !Number.isFinite(DROP_TARGET)) return;
-    var formatted = new Date(DROP_TARGET).toLocaleString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-    dropTargetNote.textContent = "Launch target: " + formatted;
-  }
 })();
