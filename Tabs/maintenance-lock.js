@@ -4,7 +4,7 @@
   var rawFile = path.split("/").pop() || "";
   var file = normalizePage(rawFile);
   var publicPages = new Set(["coming-soon"]);
-  var unlocked = window.localStorage.getItem(LOCK_KEY) === "1";
+  var unlocked = window.sessionStorage.getItem(LOCK_KEY) === "1";
 
   if (!unlocked && !publicPages.has(file)) {
     window.location.replace("/coming-soon");

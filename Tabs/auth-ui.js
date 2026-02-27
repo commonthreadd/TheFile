@@ -142,7 +142,8 @@
 
       await supabaseClient.auth.signOut();
       sessionStorage.removeItem("tmc_welcome_name");
-      localStorage.removeItem("tmc_site_unlocked");
+      sessionStorage.removeItem("tmc_site_unlocked");
+      sessionStorage.removeItem("tmc_code_unlocked");
       window.location.href = "login.html";
     });
 

@@ -39,7 +39,7 @@
   supabaseClient.auth.getSession().then(function (result) {
     var session = result && result.data ? result.data.session : null;
     if (session && session.user) {
-      window.localStorage.setItem(LOCK_KEY, "1");
+      window.sessionStorage.setItem(LOCK_KEY, "1");
       window.location.replace("/");
     }
   });
@@ -94,7 +94,7 @@
       return;
     }
 
-    window.localStorage.setItem(LOCK_KEY, "1");
+    window.sessionStorage.setItem(LOCK_KEY, "1");
     setMessage("Access approved. Entering site...", false);
     window.location.replace("/");
   });
@@ -116,6 +116,8 @@
     try {
       var response = await fetch("/api/verify-access", {
         method: "POST",
+        credentials: "same-origin",
+        cache: "no-store",
         headers: {
           "Content-Type": "application/json",
         },

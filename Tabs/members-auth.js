@@ -76,7 +76,7 @@
 
     const nameHint = email.split("@")[0] || "Member";
     sessionStorage.setItem("tmc_welcome_name", nameHint);
-    localStorage.setItem("tmc_site_unlocked", "1");
+    sessionStorage.setItem("tmc_site_unlocked", "1");
     passwordInput.value = "";
     setMessage("Welcome back. Redirecting to cart...", false);
     window.location.href = "cart.html?welcome=1";
@@ -110,7 +110,7 @@
       return;
     }
 
-    localStorage.removeItem("tmc_site_unlocked");
+    sessionStorage.removeItem("tmc_site_unlocked");
     sessionStorage.removeItem("tmc_code_unlocked");
     setMessage("Signed out.", false);
   }
