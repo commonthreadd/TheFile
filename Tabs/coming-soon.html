@@ -27,27 +27,20 @@
       width:min(920px,96vw);
       min-height:min(86vh,760px);
       border:1px solid var(--veil);
-      background:#fff;
+      background:linear-gradient(180deg,#fff 0%, #fdfbf6 100%);
       padding:48px 56px;
       text-align:center;
       display:flex;
       align-items:center;
       justify-content:center;
     }
-    .drop-logo-watermark{
-      position:absolute;
-      left:50%;
-      top:45%;
-      transform:translate(-50%,-50%);
-      width:min(430px,82%);
-      opacity:.22;
-      filter:grayscale(.08) contrast(1.08);
-      pointer-events:none;
-      z-index:0;
+    .drop-logo-top{
+      width:min(240px,56vw);
+      margin:0 auto 14px;
+      display:block;
     }
     .drop-content{
       position:relative;
-      z-index:1;
       width:min(560px,100%);
     }
     .drop-kicker{
@@ -60,11 +53,36 @@
     .drop-title{
       font-size:clamp(42px,6vw,76px);
       line-height:1.05;
-      margin-bottom:10px;
+      margin-bottom:8px;
     }
     .drop-sub{
       color:#666;
-      margin-bottom:22px;
+      margin-bottom:18px;
+    }
+    .drop-countdown{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+      margin:0 auto 24px;
+      width:min(520px,100%);
+    }
+    .count-card{
+      border:1px solid #e8dcc5;
+      background:#fff;
+      padding:12px 8px;
+    }
+    .count-value{
+      font-size:clamp(24px,4vw,38px);
+      line-height:1;
+      font-family:"Cormorant Garamond",serif;
+      color:var(--ink);
+    }
+    .count-label{
+      margin-top:5px;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#8b7a52;
     }
     .drop-msg{
       min-height:18px;
@@ -90,17 +108,38 @@
         min-height:auto;
         padding:30px 20px;
       }
+      .drop-countdown{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
     }
   </style>
 </head>
 <body>
   <main class="drop-shell">
     <section class="drop-card" aria-labelledby="drop-title">
-      <img class="drop-logo-watermark" src="assets/ui/CamelLogo.png" alt="" aria-hidden="true">
       <div class="drop-content">
+        <img class="drop-logo-top" src="assets/ui/CamelLogo.png" alt="The MenDen logo">
         <p class="drop-kicker">TheMenDen Private Release</p>
-        <h1 class="drop-title" id="drop-title">Drop Coming In 5 Months</h1>
+        <h1 class="drop-title" id="drop-title">Drop Countdown</h1>
         <p class="drop-sub">Enter your access code to reveal member login.</p>
+        <section class="drop-countdown" aria-label="Countdown to drop">
+          <article class="count-card">
+            <div class="count-value" id="count-days">00</div>
+            <div class="count-label">Days</div>
+          </article>
+          <article class="count-card">
+            <div class="count-value" id="count-hours">00</div>
+            <div class="count-label">Hours</div>
+          </article>
+          <article class="count-card">
+            <div class="count-value" id="count-mins">00</div>
+            <div class="count-label">Minutes</div>
+          </article>
+          <article class="count-card">
+            <div class="count-value" id="count-secs">00</div>
+            <div class="count-label">Seconds</div>
+          </article>
+        </section>
 
         <form class="login-form" id="drop-access" action="#" method="post">
           <label class="field-label" for="drop-code">Access Code</label>

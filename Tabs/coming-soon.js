@@ -10,6 +10,12 @@
   var emailInput = document.getElementById("drop-email");
   var passwordInput = document.getElementById("drop-password");
   var msg = document.getElementById("drop-msg");
+  var daysEl = document.getElementById("count-days");
+  var hoursEl = document.getElementById("count-hours");
+  var minsEl = document.getElementById("count-mins");
+  var secsEl = document.getElementById("count-secs");
+  var dropTitle = document.getElementById("drop-title");
+  var DROP_TARGET = new Date("2026-07-27T12:00:00Z").getTime();
   var hasCodeAccess = window.sessionStorage.getItem(CODE_UNLOCK_KEY) === "1";
 
   if (!form || !accessForm || !window.supabase || !window.supabase.createClient) return;
@@ -17,6 +23,7 @@
   if (hasCodeAccess) {
     revealLogin();
   }
+  startCountdown();
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: {
@@ -118,5 +125,41 @@
     } catch (_err) {
       return false;
     }
+  }
+
+  function startCountdown() {
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+    updateCountdown();
+    window.setInterval(updateCountdown, 1000);
+  }
+
+  function updateCountdown() {
+    var now = Date.now();
+    var diff = DROP_TARGET - now;
+
+    if (diff <= 0) {
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minsEl.textContent = "00";
+      secsEl.textContent = "00";
+      if (dropTitle) dropTitle.textContent = "Drop Is Live";
+      return;
+    }
+
+    var totalSeconds = Math.floor(diff / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var mins = Math.floor((totalSeconds % 3600) / 60);
+    var secs = totalSeconds % 60;
+
+    daysEl.textContent = pad(days);
+    hoursEl.textContent = pad(hours);
+    minsEl.textContent = pad(mins);
+    secsEl.textContent = pad(secs);
+  }
+
+  function pad(value) {
+    return String(value).padStart(2, "0");
   }
 })();
