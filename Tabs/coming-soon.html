@@ -21,11 +21,28 @@
       background:radial-gradient(circle at 50% 8%, #fbf7ef 0%, #fff 50%);
     }
     .drop-card{
+      position:relative;
+      overflow:hidden;
       width:min(560px,92vw);
       border:1px solid var(--veil);
       background:#fff;
       padding:34px;
       text-align:center;
+    }
+    .drop-logo-watermark{
+      position:absolute;
+      left:50%;
+      top:45%;
+      transform:translate(-50%,-50%);
+      width:min(360px,78%);
+      opacity:.1;
+      filter:grayscale(.2) contrast(1.02);
+      pointer-events:none;
+      z-index:0;
+    }
+    .drop-content{
+      position:relative;
+      z-index:1;
     }
     .drop-kicker{
       font-size:11px;
@@ -55,27 +72,30 @@
 <body>
   <main class="drop-shell">
     <section class="drop-card" aria-labelledby="drop-title">
-      <p class="drop-kicker">TheMenDen Private Release</p>
-      <h1 class="drop-title" id="drop-title">Drop Coming In 5 Months</h1>
-      <p class="drop-sub">Enter your access code to reveal member login.</p>
+      <img class="drop-logo-watermark" src="assets/ui/CamelLogo.png" alt="" aria-hidden="true">
+      <div class="drop-content">
+        <p class="drop-kicker">TheMenDen Private Release</p>
+        <h1 class="drop-title" id="drop-title">Drop Coming In 5 Months</h1>
+        <p class="drop-sub">Enter your access code to reveal member login.</p>
 
-      <form class="login-form" id="drop-access" action="#" method="post">
-        <label class="field-label" for="drop-code">Access Code</label>
-        <input class="field-input" id="drop-code" type="text" placeholder="Enter access code" required>
-        <button class="btn outline login-btn" type="submit">Unlock Login</button>
-      </form>
+        <form class="login-form" id="drop-access" action="#" method="post">
+          <label class="field-label" for="drop-code">Access Code</label>
+          <input class="field-input" id="drop-code" type="text" placeholder="Enter access code" required>
+          <button class="btn outline login-btn" type="submit">Unlock Login</button>
+        </form>
 
-      <form class="login-form hidden" id="drop-login" action="#" method="post">
-        <label class="field-label" for="drop-email">Email</label>
-        <input class="field-input" id="drop-email" type="email" placeholder="you@example.com" required>
+        <form class="login-form hidden" id="drop-login" action="#" method="post">
+          <label class="field-label" for="drop-email">Email</label>
+          <input class="field-input" id="drop-email" type="email" placeholder="you@example.com" required>
 
-        <label class="field-label" for="drop-password">Password</label>
-        <input class="field-input" id="drop-password" type="password" placeholder="••••••••" required>
+          <label class="field-label" for="drop-password">Password</label>
+          <input class="field-input" id="drop-password" type="password" placeholder="••••••••" required>
 
-        <button class="btn gold login-btn" type="submit">Enter Site</button>
-      </form>
+          <button class="btn gold login-btn" type="submit">Enter Site</button>
+        </form>
 
-      <p class="drop-msg" id="drop-msg" role="status" aria-live="polite"></p>
+        <p class="drop-msg" id="drop-msg" role="status" aria-live="polite"></p>
+      </div>
     </section>
   </main>
 

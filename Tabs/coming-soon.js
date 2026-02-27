@@ -30,7 +30,7 @@
     var session = result && result.data ? result.data.session : null;
     if (session && session.user) {
       window.localStorage.setItem(LOCK_KEY, "1");
-      window.location.replace("index.html");
+      window.location.replace("/");
     }
   });
 
@@ -86,7 +86,7 @@
 
     window.localStorage.setItem(LOCK_KEY, "1");
     setMessage("Access approved. Entering site...", false);
-    window.location.replace("index.html");
+    window.location.replace("/");
   });
 
   function setMessage(text, isError) {
