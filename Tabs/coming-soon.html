@@ -33,11 +33,26 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      opacity:0;
+      transform:translateY(16px) scale(.995);
+      transition:opacity .65s ease, transform .65s ease;
+    }
+    .drop-card.is-ready{
+      opacity:1;
+      transform:translateY(0) scale(1);
     }
     .drop-logo-top{
       width:min(240px,56vw);
-      margin:0 auto 14px;
+      margin:0 auto 2px;
       display:block;
+    }
+    .drop-logo-sub{
+      display:block;
+      margin:0 auto 12px;
+      font-size:12px;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      color:#6b6b6b;
     }
     .drop-content{
       position:relative;
@@ -51,13 +66,23 @@
       margin-bottom:8px;
     }
     .drop-title{
+      font-family:"Italiana","Cormorant Garamond",serif;
+      font-weight:400;
+      letter-spacing:.03em;
       font-size:clamp(42px,6vw,76px);
       line-height:1.05;
-      margin-bottom:8px;
+      margin-bottom:10px;
     }
     .drop-sub{
       color:#666;
       margin-bottom:18px;
+    }
+    .drop-target-note{
+      margin:-6px 0 16px;
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#8f7a4d;
     }
     .drop-countdown{
       display:grid;
@@ -65,16 +90,22 @@
       gap:10px;
       margin:0 auto 24px;
       width:min(520px,100%);
+      padding:10px;
+      border-radius:18px;
+      background:linear-gradient(180deg,rgba(255,255,255,.78) 0%, rgba(249,244,236,.88) 100%);
+      border:1px solid #eee4d1;
     }
     .count-card{
-      border:1px solid #e8dcc5;
-      background:#fff;
+      border:1px solid #efe5d3;
+      border-radius:14px;
+      background:linear-gradient(180deg,#fff 0%, #fbf6ec 100%);
       padding:12px 8px;
+      box-shadow:0 6px 16px rgba(39,25,8,.05);
     }
     .count-value{
       font-size:clamp(24px,4vw,38px);
       line-height:1;
-      font-family:"Cormorant Garamond",serif;
+      font-family:"Italiana","Cormorant Garamond",serif;
       color:var(--ink);
     }
     .count-label{
@@ -93,13 +124,15 @@
     .drop-msg.success{color:#2f6b3c}
     .drop-access-btn{
       width:100%;
-      background:var(--gold);
-      border:1px solid var(--gold);
+      border-radius:999px;
+      background:linear-gradient(180deg,#c9ad74 0%, #b89758 100%);
+      border:1px solid #b89758;
       color:var(--ink);
+      box-shadow:0 8px 18px rgba(127,93,36,.18);
     }
     .drop-access-btn:hover{
-      background:#a88c56;
-      border-color:#a88c56;
+      background:linear-gradient(180deg,#bfa15f 0%, #aa8a4f 100%);
+      border-color:#aa8a4f;
       color:var(--ink);
       transform:translateY(-1px);
     }
@@ -119,9 +152,11 @@
     <section class="drop-card" aria-labelledby="drop-title">
       <div class="drop-content">
         <img class="drop-logo-top" src="assets/ui/CamelLogo.png" alt="The MenDen logo">
+        <span class="drop-logo-sub">Society</span>
         <p class="drop-kicker">TheMenDen Private Release</p>
-        <h1 class="drop-title" id="drop-title">Drop Countdown</h1>
+        <h1 class="drop-title" id="drop-title">Join The Club</h1>
         <p class="drop-sub">Enter your access code to reveal member login.</p>
+        <p class="drop-target-note" id="drop-target-note"></p>
         <section class="drop-countdown" aria-label="Countdown to drop">
           <article class="count-card">
             <div class="count-value" id="count-days">00</div>

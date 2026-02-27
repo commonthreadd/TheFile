@@ -15,7 +15,10 @@
   var minsEl = document.getElementById("count-mins");
   var secsEl = document.getElementById("count-secs");
   var dropTitle = document.getElementById("drop-title");
-  var DROP_TARGET = new Date("2026-07-27T12:00:00Z").getTime();
+  var dropTargetNote = document.getElementById("drop-target-note");
+  var dropCard = document.querySelector(".drop-card");
+  var DROP_TARGET_ISO = window.DROP_TARGET_ISO || "2026-07-27T12:00:00Z";
+  var DROP_TARGET = new Date(DROP_TARGET_ISO).getTime();
   var hasCodeAccess = window.sessionStorage.getItem(CODE_UNLOCK_KEY) === "1";
 
   if (!form || !accessForm || !window.supabase || !window.supabase.createClient) return;
@@ -23,6 +26,8 @@
   if (hasCodeAccess) {
     revealLogin();
   }
+  animateEntrance();
+  renderTargetNote();
   startCountdown();
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
@@ -161,5 +166,25 @@
 
   function pad(value) {
     return String(value).padStart(2, "0");
+  }
+
+  function animateEntrance() {
+    if (!dropCard) return;
+    window.requestAnimationFrame(function () {
+      dropCard.classList.add("is-ready");
+    });
+  }
+
+  function renderTargetNote() {
+    if (!dropTargetNote || !Number.isFinite(DROP_TARGET)) return;
+    var formatted = new Date(DROP_TARGET).toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZoneName: "short",
+    });
+    dropTargetNote.textContent = "Launch target: " + formatted;
   }
 })();
