@@ -55,9 +55,9 @@
 
     setMessage("Verifying access code...", false);
 
-    var allowed = await verifyAccessCode(code);
-    if (!allowed) {
-      setMessage("Access code is invalid.", true);
+    var check = await verifyAccessCode(code);
+    if (!check.ok) {
+      setMessage(check.message || "Access code is invalid.", true);
       return;
     }
 
@@ -122,11 +122,28 @@
         body: JSON.stringify({ code: code }),
       });
 
-      if (!response.ok) return false;
-      var payload = await response.json();
-      return payload && payload.ok === true;
+      var payload = {};
+      try {
+        payload = await response.json();
+      } catch (_parseErr) {
+        payload = {};
+      }
+
+      if (response.ok && payload && payload.ok === true) {
+        return { ok: true };
+      }
+
+      if (response.status === 500) {
+        return { ok: false, message: "Server access code is not configured on Vercel." };
+      }
+
+      if (response.status === 404 || response.status === 405) {
+        return { ok: false, message: "Access API is unavailable. Redeploy with /api/verify-access." };
+      }
+
+      return { ok: false, message: "Access code is invalid." };
     } catch (_err) {
-      return false;
+      return { ok: false, message: "Cannot reach access server. Check Vercel deployment." };
     }
   }
 
