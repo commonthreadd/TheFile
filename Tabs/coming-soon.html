@@ -19,30 +19,36 @@
       align-items:center;
       justify-content:center;
       background:radial-gradient(circle at 50% 8%, #fbf7ef 0%, #fff 50%);
+      padding:24px;
     }
     .drop-card{
       position:relative;
       overflow:hidden;
-      width:min(560px,92vw);
+      width:min(920px,96vw);
+      min-height:min(86vh,760px);
       border:1px solid var(--veil);
       background:#fff;
-      padding:34px;
+      padding:48px 56px;
       text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
     .drop-logo-watermark{
       position:absolute;
       left:50%;
       top:45%;
       transform:translate(-50%,-50%);
-      width:min(360px,78%);
-      opacity:.1;
-      filter:grayscale(.2) contrast(1.02);
+      width:min(430px,82%);
+      opacity:.22;
+      filter:grayscale(.08) contrast(1.08);
       pointer-events:none;
       z-index:0;
     }
     .drop-content{
       position:relative;
       z-index:1;
+      width:min(560px,100%);
     }
     .drop-kicker{
       font-size:11px;
@@ -52,7 +58,7 @@
       margin-bottom:8px;
     }
     .drop-title{
-      font-size:44px;
+      font-size:clamp(42px,6vw,76px);
       line-height:1.05;
       margin-bottom:10px;
     }
@@ -67,6 +73,24 @@
     }
     .drop-msg.error{color:#9a2a2a}
     .drop-msg.success{color:#2f6b3c}
+    .drop-access-btn{
+      width:100%;
+      background:var(--gold);
+      border:1px solid var(--gold);
+      color:var(--ink);
+    }
+    .drop-access-btn:hover{
+      background:#a88c56;
+      border-color:#a88c56;
+      color:var(--ink);
+      transform:translateY(-1px);
+    }
+    @media (max-width: 720px){
+      .drop-card{
+        min-height:auto;
+        padding:30px 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -81,7 +105,7 @@
         <form class="login-form" id="drop-access" action="#" method="post">
           <label class="field-label" for="drop-code">Access Code</label>
           <input class="field-input" id="drop-code" type="text" placeholder="Enter access code" required>
-          <button class="btn outline login-btn" type="submit">Unlock Login</button>
+          <button class="btn login-btn drop-access-btn" type="submit">Unlock Login</button>
         </form>
 
         <form class="login-form hidden" id="drop-login" action="#" method="post">
