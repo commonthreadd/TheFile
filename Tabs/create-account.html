@@ -3,22 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cart — The Men Den</title>
+  <title>Create Account - TheMenDen</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- CSS (global first, cart overrides last) -->
   <link rel="stylesheet" href="Nick2.css">
-  <link rel="stylesheet" href="CartNick.css">
+  <link rel="stylesheet" href="Login.css">
   <script src="maintenance-lock.js"></script>
 </head>
-
 <body>
-
-  <!-- ===== Header ===== -->
   <header class="topbar">
     <div class="container">
       <a href="index.html" class="brand">
@@ -32,7 +27,7 @@
           <li><a class="nav-link" href="shop.html">Shop</a></li>
           <li><a class="nav-link" href="login.html">Members</a></li>
           <li><a class="nav-link" href="new-arrivals.html">New Arrivals</a></li>
-          <li><a class="nav-link" href="cart.html" aria-current="page">Cart</a></li>
+          <li><a class="nav-link" href="cart.html">Cart</a></li>
         </ul>
       </nav>
 
@@ -43,82 +38,44 @@
             <path d="M4 20c0-4 4-6 8-6s8 2 8 6"></path>
           </svg>
         </a>
-
-        <a class="icon-btn" id="cartBtn" aria-label="Cart" href="cart.html">
+        <a class="icon-btn" aria-label="Cart" href="cart.html">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <circle cx="9" cy="21" r="1"></circle>
             <circle cx="20" cy="21" r="1"></circle>
             <path d="M1 1h4l2.68 12.39A2 2 0 0 0 9.62 15H19a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
-          <span class="cart-badge" data-cart-count>0</span>
+          <span class="cart-badge">0</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- ===== Cart ===== -->
-  <main class="section cart-section">
+  <main class="section login-shell">
     <div class="container">
+      <section class="login-card" aria-labelledby="create-title">
+        <p class="login-eyebrow">Members Access</p>
+        <h1 id="create-title" class="login-title">Create Account</h1>
+        <p class="login-sub">Join TheMenDen to save selections and track orders.</p>
 
-      <header class="section-head">
-        <h2 class="section-title">Your Cart</h2>
-        <p class="section-sub">Curated. Reserved. Ready.</p>
-      </header>
+        <form class="login-form" id="create-form" action="#" method="post">
+          <label class="field-label" for="create-email">Email</label>
+          <input class="field-input" id="create-email" name="email" type="email" placeholder="you@example.com" required>
 
-      <div class="cart-layout">
+          <label class="field-label" for="create-password">Password</label>
+          <input class="field-input" id="create-password" name="password" type="password" placeholder="Minimum 6 characters" minlength="6" required>
 
-        <!-- Items -->
-        <section class="cart-card">
-          <div class="cart-card-head">
-            <h3 class="cart-card-title">Items</h3>
-            <button class="cart-link" type="button" id="clearCartBtn">Clear</button>
-          </div>
+          <label class="field-label" for="confirm-password">Confirm Password</label>
+          <input class="field-input" id="confirm-password" name="confirm_password" type="password" placeholder="Re-enter password" minlength="6" required>
 
-          <div id="cartEmpty" class="cart-empty" hidden>
-            Your cart is empty.
-            <div style="margin-top:14px;">
-              <a class="btn gold" href="shop.html">Shop New Arrivals</a>
-            </div>
-          </div>
+          <button class="btn gold login-btn" type="submit">Create Account</button>
+        </form>
 
-          <div id="cartItems" class="cart-items"></div>
-        </section>
-
-        <!-- Summary -->
-        <aside class="cart-card">
-          <div class="cart-card-head">
-            <h3 class="cart-card-title">Summary</h3>
-          </div>
-
-          <div class="summary-row">
-            <span>Subtotal</span>
-            <span id="subtotal">$0</span>
-          </div>
-
-          <div class="summary-row">
-            <span>Estimated Shipping</span>
-            <span id="shipping">$0</span>
-          </div>
-
-          <hr class="summary-rule" />
-
-          <div class="summary-row total">
-            <span>Total</span>
-            <span id="total">$0</span>
-          </div>
-
-          <button class="btn gold cart-checkout" type="button" id="checkoutBtn">
-            Checkout
-          </button>
-
-          <p class="summary-note">The cart. Connect Stripe later.</p>
-        </aside>
-
-      </div>
+        <p class="auth-message" id="create-message" role="status" aria-live="polite"></p>
+        <p class="join-copy">Already have an account? <a class="text-link" href="login.html">Sign In</a></p>
+      </section>
     </div>
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-layout footer-luxe">
@@ -156,6 +113,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="auth-ui.js"></script>
-  <script src="NickShop.js"></script>
+  <script src="create-account.js"></script>
 </body>
 </html>

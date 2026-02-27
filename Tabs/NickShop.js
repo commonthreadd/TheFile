@@ -1,5 +1,6 @@
 /* ====================== CART STORAGE ====================== */
 const CART_KEY = "tmc_cart_v1";
+const FAVORITES_KEY = "tmc_favorites_v1";
 
 function getCart() {
   try {
@@ -38,6 +39,38 @@ function updateCartBadge() {
 
 function money(n) {
   return `$${Number(n).toFixed(0)}`;
+}
+
+function getFavorites() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(FAVORITES_KEY));
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+function isFavorite(id) {
+  return getFavorites().some((item) => item.id === id);
+}
+
+function toggleFavorite(item) {
+  const favorites = getFavorites();
+  const exists = favorites.some((fav) => fav.id === item.id);
+
+  if (exists) {
+    const next = favorites.filter((fav) => fav.id !== item.id);
+    saveFavorites(next);
+    return false;
+  }
+
+  favorites.push(item);
+  saveFavorites(favorites);
+  return true;
 }
 
 /* ====================== HELPERS: GET ITEM DATA FROM A CARD ====================== */
@@ -102,11 +135,18 @@ if (document.body.classList.contains("shop-page")) {
     const card = media.closest(".product-card");
     const fav = media.querySelector(".icon-fav");
     const util = media.querySelector(".icon-util");
+    const item = card ? itemFromCard(card, idx) : null;
+
+    if (fav && item && isFavorite(item.id)) {
+      fav.classList.add("is-on");
+    }
 
     fav?.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      fav.classList.toggle("is-on");
+      if (!item) return;
+      const active = toggleFavorite(item);
+      fav.classList.toggle("is-on", active);
     });
 
     util?.addEventListener("click", (e) => {

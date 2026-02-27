@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="Nick2.css">
   <link rel="stylesheet" href="Login.css">
+  <script src="maintenance-lock.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -56,7 +57,7 @@
         <h1 id="login-title" class="login-title">Welcome Back</h1>
         <p class="login-sub">Sign in to view your saved selections and order history.</p>
 
-        <form class="login-form" action="#" method="post">
+        <form class="login-form" id="login-form" action="#" method="post">
           <label class="field-label" for="email">Email</label>
           <input class="field-input" id="email" name="email" type="email" placeholder="you@example.com" required>
 
@@ -64,17 +65,21 @@
           <input class="field-input" id="password" name="password" type="password" placeholder="••••••••" required>
 
           <div class="form-row">
-            <label class="check-wrap" for="remember">
-              <input id="remember" name="remember" type="checkbox">
-              <span>Remember me</span>
-            </label>
-            <a class="text-link" href="#">Forgot password?</a>
+            <button class="text-link action-link" id="reset-password-btn" type="button">Forgot password?</button>
           </div>
 
           <button class="btn gold login-btn" type="submit">Sign In</button>
+          <a class="btn outline login-btn" href="create-account.html">Create Account</a>
         </form>
 
-        <p class="join-copy">New to TheMenDen? <a class="text-link" href="#">Create an account</a></p>
+        <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+        <p class="join-copy">New to TheMenDen? Use Create Account to register with your email and password.</p>
+
+        <section class="member-panel hidden" id="member-panel" aria-label="Member account">
+          <h2 class="member-title">Member Account</h2>
+          <p class="member-copy">Signed in as <strong id="member-email"></strong></p>
+          <button class="btn gold login-btn" id="sign-out-btn" type="button">Sign Out</button>
+        </section>
       </section>
     </div>
   </main>
@@ -113,5 +118,8 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth-ui.js"></script>
+  <script src="members-auth.js"></script>
 </body>
 </html>
